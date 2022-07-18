@@ -7,6 +7,10 @@ const TypeChambreScheama = mongoose.Schema({
     montant : {
         type : Number
     },
+    etablissement : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : "Etablissement"
+    }
 })
 
 const  TypeChambre = mongoose.model("TypeChambre",TypeChambreScheama);

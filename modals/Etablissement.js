@@ -7,6 +7,9 @@ const EtablissementScheama = mongoose.Schema({
     location : {
         type : String,
     },
+    categorie : {
+      type : String  
+    },
     rating : {
         type : Number,
     },

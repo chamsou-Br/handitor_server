@@ -1,7 +1,7 @@
 const express = require("express");
 const UserRouter = express.Router();
 const UserController = require("../Controllers/UserController");
-const User = require("../modals/User");
+
 
 UserRouter.use(express.json());
 UserRouter.use(express.urlencoded({extended : true}));
