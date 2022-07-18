@@ -5,7 +5,6 @@ const LoginContoller = async (req, res) => {
   const { user, err } = await User.login(req.body.email, req.body.password);
   if (err) res.status(400).send(err);
   else {
-    console.log("sucess");
     const token = await authController.getToken(user._id);
     res.cookie("Handitor", token, {
       httpOnly: true,

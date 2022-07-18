@@ -50,6 +50,14 @@ const UserSchema = mongoose.Schema({
         type : String , 
         required : [true,'Veuillez entrer un genre']
     },
+    infoCard : {
+        type : mongoose.Schema.Types.ObjectId,
+         ref: 'InfoCard'
+    },
+    active : {
+        type : Boolean , 
+        default : true
+    }
 
  
 },{
