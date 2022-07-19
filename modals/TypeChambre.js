@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const TypeChambreScheama = mongoose.Schema({
-    title : {
+    descreption : {
         type : String,
     },
     montant : {

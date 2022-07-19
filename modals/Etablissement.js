@@ -1,4 +1,5 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const Photos = require("./photos");
 
 const EtablissementScheama = mongoose.Schema({
     titre : {
@@ -45,4 +46,7 @@ const EtablissementScheama = mongoose.Schema({
     }
 */
 const Etablissement = mongoose.model("Etablissement" , EtablissementScheama);
+
+
+
 module.exports = Etablissement;
