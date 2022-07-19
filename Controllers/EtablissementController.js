@@ -110,8 +110,8 @@ const deleteEtablissement = async (req, res) => {
       })
     })
   }
-  catch{
-    res.status(400).send( {"sucess" : false})
+  catch(err){
+    res.status(400).send( {"err" : err})
   }
 };
 

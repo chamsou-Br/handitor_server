@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const ReservationScheama = mongoose.schema({
+const ReservationScheama = mongoose.Schema({
     client : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "UserModal"
@@ -25,3 +25,6 @@ const ReservationScheama = mongoose.schema({
 
 
 })
+
+const Reservation = mongoose.model("Reservation" ,ReservationScheama);
+module.exports = Reservation
