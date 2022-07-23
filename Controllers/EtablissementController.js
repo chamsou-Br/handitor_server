@@ -73,7 +73,7 @@ const addEtablissement = async (req, res) => {
           etablissement: data._id,
         });
       });
-      res.status(200).send({ sucess: true });
+      res.status(200).send({ sucess: true ,data });
     })
     .catch((err) => res.status(400).send(err));
 };

@@ -13,8 +13,8 @@ const getTypeChambresOfEtablissement = async (req, res) => {
 
 const addTypeChambre = (req, res) => {
   try {
-    req.body.TypeChambre.map((item) => {
-      const chambre = JSON.parse(item);
+    console.log(req.body)
+    req.body.TypeChambre.map((chambre) => {
       TypeChambre.create({
         etablissement: req.params.id,
         montant: chambre.montant,
@@ -22,8 +22,9 @@ const addTypeChambre = (req, res) => {
       });
     });
     const chambre  = TypeChambre.find({ etablissement: req.params.id,})
-    res.status(200).send(chambre)
+    res.status(200).send({sucess : true})
   }catch(err) {
+    console.log(err)
     res.status(400).send(err)
   }
   
