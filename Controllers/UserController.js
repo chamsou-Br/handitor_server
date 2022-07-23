@@ -1,6 +1,24 @@
 const User = require("../modals/User");
 const authController = require("../Controllers/AuthController");
 
+
+// multer to upload picture
+const multer = require("multer");
+const InfoCard = require("../modals/InfoCard");
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./upload/InfoCard/");
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + "." + file.mimetype.split("/")[1]
+    );
+  },
+});
+var upload = multer({ storage: storage });
+
 const LoginContoller = async (req, res) => {
   const { user, err } = await User.login(req.body.email, req.body.password);
   if (err) res.status(400).send(err);
@@ -28,8 +46,14 @@ const RegisterConroller = async (req, res) => {
     handicape : data.handicape,
     typeHandicape : data.typeHandicape
   }
-  console.log(info)
+
+
   const { user, err } = await User.register(info);
+  const card = InfoCard.create({
+    num : data.num,
+    photo : req.file.path ,
+    client : user._id
+  })
   if (err) {
     res.status(400).send(err);
   } else {
@@ -42,4 +66,4 @@ const RegisterConroller = async (req, res) => {
   }
 };
 
-module.exports = { LoginContoller, RegisterConroller };
+module.exports = { LoginContoller, RegisterConroller , upload};

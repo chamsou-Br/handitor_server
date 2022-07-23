@@ -4,7 +4,8 @@ const mongoose = require("mongoose")
 const cors = require("cors");
 const UserRouter = require('./Routers/UserRoute');
 const EtablissementRouter = require('./Routers/EtablissementRoute');
-const ReservationRouter = require("./Routers/ReservationRoute") 
+const ReservationRouter = require("./Routers/ReservationRoute"); 
+const ConventionRouter = require('./Routers/ConventionRoute');
  
 // Creating express object
 const app = express();
@@ -38,4 +39,5 @@ app.get('/', (req, res) => {
 app.use("/Auth",UserRouter);
 app.use('/Etablissement',EtablissementRouter)
 app.use("/Reservation",ReservationRouter)
+app.use("/Convention" , ConventionRouter)
  

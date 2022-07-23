@@ -26,8 +26,8 @@ const getAllEtablissement = async (req, res) => {
       for (i = 0; i < data.length; i++) {
         const Eta = data[i];
         const photo = await Photos.find({ etablissement: Eta._id });
-        const chambres = await TypeChambre.find({etablissement: Eta._id});
-        newdata.push({ ...Eta._doc, photo,typeChambre : chambres });
+        const chambres = await TypeChambre.find({ etablissement: Eta._id });
+        newdata.push({ ...Eta._doc, photo, typeChambre: chambres });
       }
       res.status(200).json(newdata);
     })
@@ -50,30 +50,21 @@ const getEtablissement = async (req, res) => {
     });
 };
 
-// get all typechambre of an etablissement
-const getTypeChambresOfEtablissement = async (req, res) => {
-  TypeChambre.find({ etablissement: req.params.id })
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch((err) => {
-      res.status(400).send({ err: err });
-    });
-};
-
 // add ETablissement
 const addEtablissement = async (req, res) => {
   Etablissement.create(req.body)
     .then((data) => {
       // save type chmabre
-      req.body.TypeChambre.map((item) => {
-        const chambre = JSON.parse(item);
-        TypeChambre.create({
-          etablissement: data._id,
-          montant: chambre.montant,
-          descreption: chambre.descreption,
-        });
-      });
+      req.body.TypeChambre
+        ? req.body.TypeChambre.map((item) => {
+            const chambre = JSON.parse(item);
+            TypeChambre.create({
+              etablissement: data._id,
+              montant: chambre.montant,
+              descreption: chambre.descreption,
+            });
+          })
+        : null;
 
       // save picture of etablissement
       req.files.map(async (file) => {
@@ -92,7 +83,7 @@ const addPictureEtablissement = async (req, res) => {
   await req.files.map(async (file) => {
     Photos.create({
       photo: file.path,
-      etablissement: req.body.id,
+      etablissement: req.params.id,
     });
   });
   res.status(200).send({ sucess: true });
@@ -100,25 +91,22 @@ const addPictureEtablissement = async (req, res) => {
 
 //delete etablissement
 const deleteEtablissement = async (req, res) => {
-  try{
-    console.log("ll,",req.params.id)
-    Etablissement.findByIdAndDelete({ _id: req.params.id }).then(()=> {
-      TypeChambre.deleteMany({etablissement : req.params.id}).then(()=> {
-        Photos.deleteMany({etablissement : req.params.id}).then(()=> {
+  try {
+    Etablissement.findByIdAndDelete({ _id: req.params.id }).then(() => {
+      TypeChambre.deleteMany({ etablissement: req.params.id }).then(() => {
+        Photos.deleteMany({ etablissement: req.params.id }).then(() => {
           res.status(200).send({ sucess: true });
-        })
-      })
-    })
-  }
-  catch(err){
-    res.status(400).send( {"err" : err})
+        });
+      });
+    });
+  } catch (err) {
+    res.status(400).send({ err: err });
   }
 };
 
 module.exports = {
   getAllEtablissement,
   getEtablissement,
-  getTypeChambresOfEtablissement,
   addEtablissement,
   addPictureEtablissement,
   deleteEtablissement,

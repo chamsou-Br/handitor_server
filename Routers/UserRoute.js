@@ -11,6 +11,6 @@ UserRouter.get("/test" , (req , res) =>{
 })
 
 UserRouter.post("/login" , UserController.LoginContoller);
-UserRouter.post("/register" , UserController.RegisterConroller)
+UserRouter.post("/register" ,UserController.upload.single("photo") ,UserController.RegisterConroller)
 
 module.exports = UserRouter
