@@ -6,6 +6,7 @@ const UserRouter = require('./Routers/UserRoute');
 const EtablissementRouter = require('./Routers/EtablissementRoute');
 const ReservationRouter = require("./Routers/ReservationRoute"); 
 const ConventionRouter = require('./Routers/ConventionRoute');
+const SlideRouter = require('./Routers/SlideRoute');
  
 // Creating express object
 const app = express();
@@ -40,4 +41,4 @@ app.use("/Auth",UserRouter);
 app.use('/Etablissement',EtablissementRouter)
 app.use("/Reservation",ReservationRouter)
 app.use("/Convention" , ConventionRouter)
- 
+app.use("/Slide",SlideRouter)
