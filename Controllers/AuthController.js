@@ -17,7 +17,6 @@ const checkuser = (req, res, next) => {
 };
 
 const checkToken = (req , res , next) => {
-  console.log('t',req.headers.authorization)
   const token = req.headers.authorization;
   if (token) {
     jwt.verify(token, "Handitor", async (err, encoded) => {

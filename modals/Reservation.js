@@ -5,6 +5,9 @@ const ReservationScheama = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : "UserModal"
     },
+    typePayment : {
+        type : String
+    },
     montant : {
         type : Number, 
     },
