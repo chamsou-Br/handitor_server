@@ -8,6 +8,9 @@ const ReservationScheama = mongoose.Schema({
     typePayment : {
         type : String
     },
+    nombreChambre : {
+        type : Number
+    },
     montant : {
         type : Number, 
     },
