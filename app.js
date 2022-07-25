@@ -7,6 +7,7 @@ const EtablissementRouter = require('./Routers/EtablissementRoute');
 const ReservationRouter = require("./Routers/ReservationRoute"); 
 const ConventionRouter = require('./Routers/ConventionRoute');
 const SlideRouter = require('./Routers/SlideRoute');
+const AuthController = require("./Controllers/AuthController")
  
 // Creating express object
 const app = express();
@@ -30,7 +31,8 @@ mongoose.connection.once('open',()=> {
 })
 
 // Handling GET request
-app.get('/', (req, res) => {
+app.get('/', AuthController.checkToken ,(req, res) => {
+    console.log(req.headers.authorization)
     res.send('A simple Node App is '
         + 'running on this server')
     res.end()

@@ -16,6 +16,21 @@ const checkuser = (req, res, next) => {
   } else res.status(400).send({ existe: false });
 };
 
+const checkToken = (req , res , next) => {
+  console.log('t',req.headers.authorization)
+  const token = req.headers.authorization;
+  if (token) {
+    jwt.verify(token, "Handitor", async (err, encoded) => {
+      if (err) {
+        res.status(400).send({ existe: false });
+      }
+      if (encoded) {
+        next()
+      }
+    });
+  } else res.status(400).send({ existe: false });
+}
+
 const getToken = async (id) => {
   return jwt.sign({ id }, "Handitor", {
     expiresIn: 3 * 60 * 60 * 24,
@@ -33,7 +48,7 @@ const HandlError = (err) => {
     sex : null,
     country : null
   };
-  console.log("erroororoorro")
+
   if (err.code === 11000) {
     if (err.keyValue.email) {
       errors.email = "cet email est déja existé";
@@ -62,4 +77,4 @@ const HandlError = (err) => {
   return errors;
 };
 
-module.exports = { getToken, HandlError, checkuser };
+module.exports = { getToken, HandlError, checkuser , checkToken };
