@@ -15,7 +15,7 @@ const app = express();
 
 
 // Port Number
-const PORT = process.env.PORT ||5000;
+const PORT = 5000;
  
 // Server Setup
 app.use(cors());

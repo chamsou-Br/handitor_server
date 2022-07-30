@@ -21,7 +21,7 @@ const UserSchema = mongoose.Schema({
     },
     phoneNumber : {
         type : String,
-        required : [true,'Veuillez entrer un N de teléphone'],
+      //  required : [true,'Veuillez entrer un N de teléphone'],
         validate : [isMobilePhone ,'Veuillez entrer un valid phoneNumber'],
         unique : true,
     },
@@ -46,9 +46,9 @@ const UserSchema = mongoose.Schema({
     typeHandicape : {
         type : String , 
     },
-    country :  {
+    wilaya :  {
         type : String , 
-        required : [true,'Veuillez entrer un genre']
+        required : [true,'Veuillez entrer un wialya']
     },
     infoCard : {
         type : mongoose.Schema.Types.ObjectId,
