@@ -16,13 +16,13 @@ EtablissementRouter.use(express.json())
 EtablissementRouter.use(express.urlencoded({extended : true}))
 
 // routers
-EtablissementRouter.post('/' ,AuthController.checkToken,Etablissementcontroller.upload.array("photo"), Etablissementcontroller.addEtablissement)
-EtablissementRouter.post("/:id/upload",AuthController.checkToken,Etablissementcontroller.upload.array("photo"),Etablissementcontroller.addPictureEtablissement)
-EtablissementRouter.get('/' ,AuthController.checkToken, Etablissementcontroller.getAllEtablissement)
-EtablissementRouter.get("/:id" ,AuthController.checkToken, Etablissementcontroller.getEtablissement)
-EtablissementRouter.delete("/:id",AuthController.checkToken,Etablissementcontroller.deleteEtablissement)
-EtablissementRouter.get('/:id/TypeChambre' ,AuthController.checkToken ,ChambreController.getTypeChambresOfEtablissement )
-EtablissementRouter.post("/:id/addTypeChambre",AuthController.checkToken,ChambreController.addTypeChambre)
+EtablissementRouter.post('/' ,Etablissementcontroller.upload.array("photo"), Etablissementcontroller.addEtablissement)
+EtablissementRouter.post("/:id/upload",Etablissementcontroller.upload.array("photo"),Etablissementcontroller.addPictureEtablissement)
+EtablissementRouter.get('/' , Etablissementcontroller.getAllEtablissement)
+EtablissementRouter.get("/:id" , Etablissementcontroller.getEtablissement)
+EtablissementRouter.delete("/:id",Etablissementcontroller.deleteEtablissement)
+EtablissementRouter.get('/:id/TypeChambre',ChambreController.getTypeChambresOfEtablissement )
+EtablissementRouter.post("/:id/addTypeChambre",ChambreController.addTypeChambre)
 
 // export EtablissementRouter
 module.exports = EtablissementRouter;

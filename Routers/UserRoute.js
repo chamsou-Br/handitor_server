@@ -11,7 +11,7 @@ UserRouter.get("/test" , (req , res) =>{
     res.status(200).send("test with sucessful");
 })
 
-UserRouter.post("/login" ,AuthController.checkToken, UserController.LoginContoller);
-UserRouter.post("/register" ,AuthController.checkToken,UserController.upload.single("photo") ,UserController.RegisterConroller)
+UserRouter.post("/login" , UserController.LoginContoller);
+UserRouter.post("/register" ,UserController.upload.single("photo") ,UserController.RegisterConroller)
 
 module.exports = UserRouter
