@@ -45,10 +45,13 @@ const HandlError = (err) => {
     phoneNumber: null,
     dateOfBirth : null,
     sex : null,
-    country : null
+    wilaya : null,
+    typeHandicape : null,
+    phoneNumber : null
   };
 
   if (err.code === 11000) {
+    console.log("pppppp")
     if (err.keyValue.email) {
       errors.email = "cet email est déja existé";
     }
@@ -59,7 +62,7 @@ const HandlError = (err) => {
   }
   if (err.message.includes("UserModal validation failed")) {
     Object.values(err.errors).forEach(({ properties }) => {
-        console.log(properties.path)
+        console.log(properties.path,"kkkk")
       errors[properties.path] = properties.message;
     });
   }
@@ -72,7 +75,6 @@ const HandlError = (err) => {
   if (err.message === "password min length") {
     errors.password = "La longeur minimale est 8 caractère";
   }
-  console.log(errors)
   return errors;
 };
 

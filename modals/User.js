@@ -21,11 +21,7 @@ const UserSchema = mongoose.Schema({
     },
     phoneNumber : {
         type : String,
-        required : [true,'Veuillez entrer un N de teléphone'],
-        validate : [isMobilePhone ,'Veuillez entrer un valid phoneNumber'],
-        unique : true,
     },
-    
     password : {
         type :String,
         required :[true,'Veuillez entrer un mot de pass'],
@@ -46,9 +42,9 @@ const UserSchema = mongoose.Schema({
     typeHandicape : {
         type : String , 
     },
-    country :  {
+    wilaya :  {
         type : String , 
-        required : [true,'Veuillez entrer un genre']
+        required : [true,'Veuillez entrer un wilaya']
     },
     infoCard : {
         type : mongoose.Schema.Types.ObjectId,
@@ -92,7 +88,9 @@ UserSchema.statics.register = async(info) => {
            } else {
                throw Error("password min length")
            } 
+           console.log("^")
             const user = await User.create({...info , password : passwordHash});
+            console.log("^^")
             return {user}
     }catch(err) {
         console.log(err)
